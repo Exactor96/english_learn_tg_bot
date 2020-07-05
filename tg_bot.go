@@ -6,6 +6,14 @@ import (
 	"os"
 )
 
+var testKeyboard = tgbotapi.NewInlineKeyboardMarkup(
+	tgbotapi.NewInlineKeyboardRow(
+		tgbotapi.NewInlineKeyboardButtonURL("1.com", "http://1.com"),
+		tgbotapi.NewInlineKeyboardButtonSwitch("2sw", "open 2"),
+		tgbotapi.NewInlineKeyboardButtonData("3", "3"),
+	),
+)
+
 func main() {
 
 	TokenTg := os.Getenv("TokenTg")
@@ -31,6 +39,12 @@ func main() {
 		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+
+		switch update.Message.Text {
+		case "open":
+			msg.ReplyMarkup = testKeyboard
+
+		}
 
 		bot.Send(msg)
 	}
