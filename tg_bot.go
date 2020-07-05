@@ -1,23 +1,26 @@
 package main
 
 import (
-	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"os"
+
+	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-var testKeyboard = tgbotapi.NewInlineKeyboardMarkup(
-	tgbotapi.NewInlineKeyboardRow(
-		tgbotapi.NewInlineKeyboardButtonURL("1.com", "http://1.com"),
-		tgbotapi.NewInlineKeyboardButtonSwitch("2sw", "open 2"),
-		tgbotapi.NewInlineKeyboardButtonData("3", "3"),
+const (
+	AddNewWord = "AddNewWord"
+	GetTest    = "GetTest"
+)
+
+var mainKeyboard = tgbotapi.NewReplyKeyboard(
+	tgbotapi.NewKeyboardButtonRow(
+		tgbotapi.NewKeyboardButton(AddNewWord),
+		tgbotapi.NewKeyboardButton(GetTest),
 	),
 )
 
 func main() {
-
-	TokenTg := os.Getenv("TokenTg")
-	bot, err := tgbotapi.NewBotAPI(TokenTg)
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TokenTg"))
 	if err != nil {
 		log.Panic(err)
 	}
@@ -32,20 +35,19 @@ func main() {
 	updates, err := bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		if update.Message == nil { // ignore any non-Message Updates
+		if update.Message == nil {
 			continue
 		}
 
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-
+		var messageText string = update.Message.Text
 		switch update.Message.Text {
-		case "open":
-			msg.ReplyMarkup = testKeyboard
-
+		case AddNewWord:
+			messageText = "Enter the word!"
+		case GetTest:
+			messageText = "Test starting!"
 		}
-
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, messageText)
+		msg.ReplyMarkup = mainKeyboard
 		bot.Send(msg)
 	}
 }
