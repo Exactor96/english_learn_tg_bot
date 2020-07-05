@@ -1,0 +1,1 @@
+web: bin/tg_bot
