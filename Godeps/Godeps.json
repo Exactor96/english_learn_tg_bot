@@ -1,0 +1,35 @@
+{
+	"ImportPath": "english_learn_tg_bot",
+	"GoVersion": "go1.13",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/PuerkitoBio/goquery",
+			"Comment": "v1.5.1-4-g89946c8",
+			"Rev": "89946c829f29a2c154667e6194d4f409d8abcbde"
+		},
+		{
+			"ImportPath": "github.com/andybalholm/cascadia",
+			"Comment": "v1.2.0",
+			"Rev": "903109d295d56a99095f2cfab0c2ca8d4b22f648"
+		},
+		{
+			"ImportPath": "github.com/go-telegram-bot-api/telegram-bot-api",
+			"Comment": "v4.6.4-55-g7434b04",
+			"Rev": "7434b0456e81b6448b591f4fdf8efd7d1a734ae8"
+		},
+		{
+			"ImportPath": "github.com/technoweenie/multipartstreamer",
+			"Comment": "v1.0.1",
+			"Rev": "a90a01d73ae432e2611d178c18367fbaa13e0154"
+		},
+		{
+			"ImportPath": "golang.org/x/net/html",
+			"Rev": "4c5254603344ea4a8ae4bed7e296a9588303e14f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/html/atom",
+			"Rev": "4c5254603344ea4a8ae4bed7e296a9588303e14f"
+		}
+	]
+}
